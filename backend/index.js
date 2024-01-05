@@ -1,18 +1,11 @@
 import express from "express";
 const app = express();
-const port = 3000;
-
-const logger = (req, res, next) => {
-  console.log(`Request method: ${req.method}, Request URL: ${req.url}`);
-  next();
-};
-
-app.use(logger);
 
 app.get("/", (req, res) => {
-  res.send("Hello");
-});
+  console.log(req.rawHeaders);
+  res.send("Hello, World!");
+})
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(3000, () => {
+  console.log("Server running on port 3000.");
 });

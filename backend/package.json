@@ -11,6 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "@langchain/community": "^0.0.14",
+    "@langchain/openai": "^0.0.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "hnswlib-node": "^1.4.2",
+    "langchain": "^0.0.214",
+    "pg": "^8.11.3"
   }
 }
