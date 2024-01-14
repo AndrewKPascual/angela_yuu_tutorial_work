@@ -3,15 +3,74 @@
 
 <head>
   <title>Langchain Question Asker</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    #chatbox {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #000;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #fff;
+      font-size: 16px;
+    }
+    #chatbox p {
+      margin: 0;
+      padding: 5px 0;
+    }
+    #chatbox p:nth-child(even) {
+      background-color: #ddd;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 5px;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Ask a Question</h1>
-  <form action="/ask" method="POST">
-    <label for="question">Question:</label>
-    <input type="text" id="question" name="question" required>
-    <input type="submit" value="Submit">
-  </form>
+  <div>
+    <h1>Ask a Question</h1>
+    <div id="chatbox"></div>
+    <form id="questionForm">
+      <input type="text" id="question" name="question" required>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('questionForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const question = document.getElementById('question').value;
+      const chatbox = document.getElementById('chatbox');
+      chatbox.innerHTML += '<p>You: ' + question + '</p>';
+
+      fetch('/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ question: question })
+      })
+      .then(response => response.text())
+      .then(response => {
+        chatbox.innerHTML += '<p>Bot: ' + response + '</p>';
+        chatbox.scrollTop = chatbox.scrollHeight;
+      });
+
+      document.getElementById('question').value = '';
+    });
+  </script>
 </body>
 
 </html>

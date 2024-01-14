@@ -17,6 +17,7 @@
     "express": "^4.18.2",
     "hnswlib-node": "^1.4.2",
     "langchain": "^0.0.214",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "react-scripts": "^5.0.1"
   }
 }
